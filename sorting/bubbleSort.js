@@ -11,23 +11,50 @@
 export const bubbleSortWithForLoop = (data) => {
   let iteration = 0;
   swapped = true;
-  
+
   // this is a short circuit cinditon in case we do not swp in a ninteration that means the array is sorted
   while (swapped) {
     swapped = false;
-    for(let i=0; i < data.length - iteration; i++){
-      if(data[i] > data[i + 1]){
-        let temp = data[i + 1];
-        data[i + 1] = data[i];
-        data[i] = temp;
+    for (let i = 0; i < data.length - iteration; i++) {
+      if (data[i] > data[i + 1]) {
+        // es5 way of swapping
+        // let temp = data[i + 1];
+        // data[i + 1] = data[i];
+        // data[i] = temp;
+
+        // es6 way of swapping
+        [data[i], data[i + 1]] = [data[i + 1], data[i]]
         swapped = true;
       }
-    }  
+    }
+    iteration++;
+  }
+
+  return data;
+}
+
+
+export const swapElements = (data, iteration, swapped) => {
+  if (swapped) {
+    swapped = false;
+
+    for (let i = 0; i < data.length - iteration; i++) {
+      if (data[i] > data[i + 1]) {
+        [data[i], data[i + 1]] = [data[i + 1], data[i]]
+        swapped = true;
+      }
+    }
+    iteration++;
+    swapElements(data, iteration, swapped)
   }
 
   return data;
 }
 
 export const bubbleSortWithRecursion = (data) => {
+  let iteration = 0;
+  swapped = true;
 
+  return swapElements(data, iteration, swapped)
 }
+
